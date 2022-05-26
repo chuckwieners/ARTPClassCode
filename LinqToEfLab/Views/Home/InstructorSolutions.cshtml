@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Linq To EF - LAB Instructor Solutions";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Products Between $12 and $50</h3>
+        <ul>
+            @foreach (Product p in ViewBag.TogetherExample)
+            {
+                <li>@p.ProductName &mdash; <strong>@string.Format($"{p.UnitPrice:c}")</strong></li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.Count</strong> products represented.</p>
+    </div>
+    <div class="col-md-6">
+        <!--Dairy Products-->
+        <h3>Dairy Products</h3>
+        <ul>
+            @foreach (Product p in ViewBag.MiniOne)
+            {
+                <li>
+                    @p.ProductName &mdash;
+                    <strong>@p.Category.CategoryName</strong>
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniOneCount</strong> items represented.</p>
+
+        <!--Cats > 10 products-->
+        <h3>Categories with 10 or More Products</h3>
+        <ul>
+            @foreach (Category c in ViewBag.MiniTwo)
+            {
+                <li>
+                    @c.CategoryName &mdash;
+                    <strong>@c.Products.Count</strong>
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniTwoCount</strong> items represented.</p>
+
+        <!--German Suppliers-->
+        <h3>German Suppliers</h3>
+        <ul>
+            @foreach (Supplier s in ViewBag.MiniThree)
+            {
+                <li>
+                    @s.CompanyName &mdash;
+                    <strong>@s.Country</strong>
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniThreeCount</strong> items represented.</p>
+
+        <!--Products containing Chef -->
+        <h3>'Chef' Products</h3>
+        <ul>
+            @foreach (Product p in ViewBag.MiniFour)
+            {
+                <li>@p.ProductName</li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniFourCount</strong> items represented.</p>
+
+        <!--Okra-->
+        <h3>Louisiana Hot Spiced Okra Cost</h3>
+        @if (ViewBag.MiniFiveCount > 1)
+        {
+            <ul>
+                @foreach (Product p in ViewBag.MiniFive)
+                {
+                    <li>
+                        @p.ProductName &mdash; Units In Stock: @p.UnitsInStock <br />
+                        Total Cost: @string.Format($"{p.UnitsInStock * p.UnitPrice:c}")
+                    </li>
+                }
+            </ul>
+        }
+        else if (ViewBag.MiniFiveCount == 1)
+        {
+            Product p = (Product)ViewBag.MiniFive;
+            <p>
+                @p.ProductName &mdash; Units In Stock: @p.UnitsInStock <br />
+                Total Cost: @string.Format($"{p.UnitsInStock * p.UnitPrice:c}")
+            </p>
+        }
+        else
+        {
+            <p>
+                @ViewBag.MiniFive &mdash; Units In Stock: @ViewBag.MiniFiveCount <br />
+                Total Cost: @string.Format($"{ViewBag.MiniFiveCount:c}")
+            </p>
+        }
+        <p>
+            There @(ViewBag.MiniFiveCount > 1 ? "are" : "is") a total of
+            <strong>@ViewBag.MiniFiveCount</strong>
+            @(ViewBag.MiniFiveCount > 1 ? "items" : "item") represented.
+        </p>
+
+        <!--Units On Order-->
+        <h3>Products On Order</h3>
+        <ul>
+            @foreach (Product p in ViewBag.MiniSix)
+            {
+                <li>
+                    @p.ProductName &mdash;
+                    <strong>Units on Order:</strong> @p.UnitsOnOrder
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniSixCount</strong> items represented.</p>
+
+    </div>
+</div>
+<!--New Row-->
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <!--Active Products Less than $10-->
+        <h3>Active Products (less than $10)</h3>
+        <ul>
+            @foreach (Product p in ViewBag.MiniSeven)
+            {
+                <li>
+                    @p.ProductName &mdash; <strong>Unit Price:</strong>
+                    @string.Format($"{p.UnitPrice:c}")
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniSevenCount</strong> items represented.</p>
+    </div>
+    <div class="col-md-6">
+        <!--Discontinued Products - In Stock - Total Price-->
+        <h3>Discontinued Products</h3>
+        <ul>
+            @foreach (Product p in ViewBag.MiniEight)
+            {
+                <li>
+                    @p.ProductName<br />
+                    <strong>On Hand: </strong>@string.Format($"{p.UnitsInStock}")<br />
+                    <strong>Price per unit:</strong>
+                    @string.Format($"{p.UnitPrice:c}")
+                    <strong>Total Price: </strong>
+                    @string.Format($"{p.UnitPrice * p.UnitsInStock:c}")
+                </li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.MiniEightCount</strong> items represented.</p>
+        <p>
+            There total cost of thes items in stock is <strong>
+                @string.Format($"{ViewBag.MiniEightTotal:c}")
+            </strong>
+        </p>
+    </div>
+</div>

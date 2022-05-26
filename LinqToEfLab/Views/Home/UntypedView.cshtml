@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Linq To EF - LAB";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <!--Together Example-->
+        <h3>Products Between $12 and $50</h3>
+        <ul>
+            @foreach (Product p in ViewBag.TogetherExample)
+            {
+                <li>@p.ProductName &mdash; <strong>@string.Format($"{p.UnitPrice:c}")</strong></li>
+            }
+        </ul>
+        <p>There are a total of <strong>@ViewBag.Count</strong> products represented.</p>
+    </div>
+    <div class="col-md-6">
+        <!--Dairy Products-->
+        <!--Cats > 10 products-->
+        <!--German Suppliers-->
+        <!--Products containing Chef -->
+        <!--Okra-->
+        <!--Units On Order-->
+    </div>
+</div>
+<!--New Row-->
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <!--Active Products Less than $10-->
+    </div>
+    <div class="col-md-6">
+        <!--Discontinued Products - In Stock - Total Price-->
+    </div>
+</div>
